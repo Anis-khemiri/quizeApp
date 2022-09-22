@@ -7,3 +7,5 @@
 07. Show the Number of Bullets Depend on Questions Count
 08. Show the Number for the right and Wrong Answers
 09. Create Countdown Timer
+10. create request with ajax
+11. create the bullets function
