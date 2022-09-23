@@ -45,7 +45,13 @@ submitButton.onclick = function() {
 
      // Check The Answer
      checkAnswer(theRightAnswer, qCount);
-
+     // remove previous question
+     quizArea.innerHTML= '';
+     answerArea.innerHTML = '';
+     // add question data
+     addQuestionData(questionsObject[currentIndex], qCount);
+     //handel bullets class
+     handelBullets();
 
 
 }
@@ -153,4 +159,18 @@ function checkAnswer(ranswer, qCount){
   }
   
 
+}
+
+function handelBullets(){
+
+let bulletsSpans = document.querySelectorAll(".bullets .spans span");
+let   arrayOfSpans = Array.from(bulletsSpans);
+arrayOfSpans.forEach((span, index)=>{
+  if(currentIndex === index){
+    span.className = "on";
+  }
+})
+
+console.log(bulletsSpans);
+console.log(arrayOfSpans);
 }
