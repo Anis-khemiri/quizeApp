@@ -9,7 +9,7 @@
     },
     {
       "title": "Is <img> Element Has Attribute href",
-      "answer_1": "Yes",
+      "answer_1": "yes",
       "answer_2": "No Its For Anchor Tag <a>",
       "answer_3": "All Elements Has This Attribute",
       "answer_4": "Answer 1 And 3 Is Right",
