@@ -1,8 +1,9 @@
 let countSpan = document.querySelector('.quiz-info .count span');
-
 let bulletsSpanContainer = document.querySelector('.bullets .spans');
 let quizArea = document.querySelector(".quiz-area");
 let answerArea = document.querySelector(".answers-area");
+let submitButton = document.querySelector(".submit-button");
+console.log(submitButton);
 
 
 
@@ -10,6 +11,7 @@ let answerArea = document.querySelector(".answers-area");
 console.log(quizArea);
 // set option
 let currentIndex = 0;
+let rightAnswers = 0;
 
 
 
@@ -22,17 +24,31 @@ function getQueastion() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      let questionObject = JSON.parse(this.responseText);
-      console.log(questionObject);
-      let qCount = questionObject.length;
+      let questionsObject = JSON.parse(this.responseText);
+      console.log(questionsObject);
+      let qCount = questionsObject.length;
       console.log(qCount);
       //create Bullets + Set Questions Count
       createBullets(qCount);
 
      // Add Question Data
-    addQuestionData(questionObject[currentIndex], qCount);
+    addQuestionData(questionsObject[currentIndex], qCount);
+
+// click on submit
+
+submitButton.onclick = function() {
+     // Get Right Answer
+     let theRightAnswer = questionsObject[currentIndex].right_answer;
+
+     // Increase Index
+     currentIndex++;
+
+     // Check The Answer
+     checkAnswer(theRightAnswer, qCount);
 
 
+
+}
 
 
 
@@ -117,5 +133,24 @@ answerArea.appendChild(mainDiv);
 
 }
 
+
+}
+
+function checkAnswer(ranswer, qCount){
+  let answers = document.getElementsByName("question");
+  let theChoosenAnswer;
+
+  for (let i = 0; i < answers.length; i++) {
+    if (answers[i].checked) {
+      theChoosenAnswer = answers[i].dataset.answer;
+    }
+  }
+  console.log(ranswer);
+  console.log(theChoosenAnswer);
+  if(ranswer === theChoosenAnswer){
+    rightAnswers++;
+ 
+  }
+  
 
 }
