@@ -102,4 +102,7 @@ flex: 1;
   .quiz-app .results span.perfect {
     color: #0075ff;
   }
-
+.quiz-app .results {
+  font-size: 36px;
+  text-align: center;
+}

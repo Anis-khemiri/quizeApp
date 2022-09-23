@@ -1,8 +1,10 @@
 let countSpan = document.querySelector('.quiz-info .count span');
+let bullets = document.querySelector('.bullets');
 let bulletsSpanContainer = document.querySelector('.bullets .spans');
 let quizArea = document.querySelector(".quiz-area");
 let answerArea = document.querySelector(".answers-area");
 let submitButton = document.querySelector(".submit-button");
+let resultFinal = document.querySelector(".results");
 console.log(submitButton);
 
 
@@ -52,6 +54,8 @@ submitButton.onclick = function() {
      addQuestionData(questionsObject[currentIndex], qCount);
      //handel bullets class
      handelBullets();
+     // show result
+     showResults(qCount);
 
 
 }
@@ -87,7 +91,8 @@ function createBullets(num) {
 
 function addQuestionData(obj, count){
 
-// console.log(obj);
+if(currentIndex < count){
+  // console.log(obj);
 // console.log(count);
 // create h2 question title
 let questionTitle = document.createElement("h2");
@@ -138,6 +143,7 @@ mainDiv.appendChild(theLabel);
 answerArea.appendChild(mainDiv);
 
 }
+}
 
 
 }
@@ -173,4 +179,35 @@ arrayOfSpans.forEach((span, index)=>{
 
 console.log(bulletsSpans);
 console.log(arrayOfSpans);
+}
+
+
+function showResults(count) {
+  let theresults;
+if(currentIndex === count){
+  console.log("question finish");
+quizArea.remove();
+answerArea.remove();
+submitButton.remove();
+bullets.remove();
+
+
+
+
+
+let myr = rightAnswers * 100 / count;
+console.log(myr.toFixed(2));
+if(myr < 50 ){
+  theresults = `<span class="bad">BAD</span> <br> your right answer is ${rightAnswers} from ${count} your Percent ${myr.toFixed(2)}%` 
+ 
+}else if (myr > 50 && myr < 70){
+  theresults = `<span class="good">GOOD</span> your right answer is ${rightAnswers} from ${count} your Percent ${myr.toFixed(2)}%` 
+ 
+}else{
+  theresults = `<span class="perfect">PERFECT</span> your right answer is ${rightAnswers} from ${count} your Percent ${myr.toFixed(2)}%` 
+ 
+}
+resultFinal.innerHTML = theresults;
+
+}
 }

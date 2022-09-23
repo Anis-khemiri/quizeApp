@@ -12,4 +12,6 @@
 12. create show answer
 13. check Answers function
 14. get next question
+15. show result function
+
 
