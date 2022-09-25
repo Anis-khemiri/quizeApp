@@ -6,19 +6,56 @@ let answerArea = document.querySelector('.answers-area');
 let submitButton = document.querySelector('.submit-button');
 let resultFinal = document.querySelector('.results');
 let countdownElement = document.querySelector('.countdown');
-console.log(submitButton);
+let btnQuestionHtml = document.querySelector('.btn-html');
+let btnQuestionCss = document.querySelector('.btn-css');
+console.log(btnQuestionCss);
 
-console.log(quizArea);
+console.log(btnQuestionHtml);
+
+btnQuestionCss.onclick = function () {
+  btnQuestionHtml.classList.remove('active');
+  btnQuestionCss.classList.add('active');
+  getQueastion();
+  btnQuestionCss.disabled = true;
+  btnQuestionHtml.disabled = true;
+};
+btnQuestionHtml.onclick = function () {
+  btnQuestionCss.classList.remove('active');
+  btnQuestionHtml.classList.add('active');
+  getQueastion();
+  btnQuestionHtml.disabled = true;
+  btnQuestionCss.disabled = true;
+};
+
+// function myFunction(){
+//   var x;
+//   console.log("dxfsqw");
+// x = "CSS";
+
+// }
+
+// function myFunction2(){
+//  var x;
+// x = "HTML";
+
+// }
+
 // set option
 let currentIndex = 0;
 let rightAnswers = 0;
 let countdownInterval;
+let q;
+let questionsObject;
 
 function getQueastion() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      let questionsObject = JSON.parse(this.responseText);
+  let myRequest = new XMLHttpRequest();
+
+  myRequest.onreadystatechange = function () {
+    btnQuestionHtml.classList.contains('active')
+        ? (questionsObject = JSON.parse(this.responseText)['HTML'])
+        : (questionsObject = JSON.parse(this.responseText)['CSS']);
+    if (this.readyState === 4 && this.status === 200) {
+      
       console.log(questionsObject);
       let qCount = questionsObject.length;
       console.log(qCount);
@@ -29,7 +66,7 @@ function getQueastion() {
       addQuestionData(questionsObject[currentIndex], qCount);
 
       // Start CountDown
-      countdown(150, qCount);
+      countdown(50, qCount);
 
       // click on submit
 
@@ -52,17 +89,24 @@ function getQueastion() {
 
         // Start CountDown
         clearInterval(countdownInterval);
-        countdown(150, qCount);
+        countdown(50, qCount);
         // show result
         showResults(qCount);
       };
     }
   };
-  xhttp.open('GET', 'html_question.json', true);
-  xhttp.send();
+  myRequest.open('GET', 'html_question.json', true);
+  myRequest.send();
 }
 
-getQueastion();
+function myPath() {
+  if (btnQuestionHtml.classList.contains('active')) {
+    console.log('html');
+  } else if (btnQuestionCss.classList.contains('active')) {
+    console.log('css');
+    getQueastion();
+  }
+}
 
 function createBullets(num) {
   countSpan.innerHTML = num;
@@ -197,14 +241,15 @@ function countdown(duration, count) {
 
       minutes = minutes < 10 ? `0${minutes}` : minutes;
       seconds = seconds < 10 ? `0${seconds}` : seconds;
-if (duration < 21){
-  countdownElement.style.color ="red";
-}
+      if (duration < 21) {
+        countdownElement.style.color = 'red';
+      }
       countdownElement.innerHTML = `${minutes}:${seconds}`;
 
       if (--duration < 0) {
         clearInterval(countdownInterval);
         submitButton.click();
+        countdownElement.style.color = 'black';
       }
     }, 1000);
   }

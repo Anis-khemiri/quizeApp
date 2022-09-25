@@ -106,3 +106,29 @@ flex: 1;
   font-size: 36px;
   text-align: center;
 }
+.btn-html {
+  background-color: #0075ff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: #ddd;
+  cursor: pointer;
+}
+.btn-html:disabled {
+  background-color: #7d97b4;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: #ddd;
+}
+.btn-css {
+  background-color: #0075ff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: #ddd;
+  cursor: pointer;
+}
+.btn-css:disabled {
+  background-color: #7d97b4;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: #ddd;
+}
